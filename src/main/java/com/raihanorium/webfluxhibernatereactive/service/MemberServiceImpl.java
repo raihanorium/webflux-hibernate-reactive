@@ -21,6 +21,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Mono<List<Member>> getAllMembers() {
         return memberRepository.getAll()
-                .convert().with(UniReactorConverters.toMono());
+                .convert()
+                .with(UniReactorConverters.toMono());
+    }
+
+    @Override
+    public Mono<Member> save(Member member) {
+        return memberRepository.save(member)
+                .convert()
+                .with(UniReactorConverters.toMono());
     }
 }

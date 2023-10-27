@@ -6,9 +6,7 @@ import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -24,6 +22,12 @@ public class MemberController {
     @GetMapping
     public Mono<ResponseEntity<List<Member>>> getMembers() {
         return memberService.getAllMembers()
+                .map(ResponseEntity::ok);
+    }
+
+    @PostMapping
+    public Mono<ResponseEntity<Member>> createMember(@RequestBody Member member) {
+        return memberService.save(member)
                 .map(ResponseEntity::ok);
     }
 }

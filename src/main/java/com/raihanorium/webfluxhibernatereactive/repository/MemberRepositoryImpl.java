@@ -23,4 +23,9 @@ public class MemberRepositoryImpl implements MemberRepository {
                 .createQuery("from Member", Member.class)
                 .getResultList());
     }
+
+    @Override
+    public Uni<Member> save(Member member) {
+        return sessionFactory.withTransaction(session -> session.merge(member));
+    }
 }

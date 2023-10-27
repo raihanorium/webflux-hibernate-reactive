@@ -8,4 +8,6 @@ import java.util.List;
 public interface MemberService {
 
     Mono<List<Member>> getAllMembers();
+
+    Mono<Member> save(Member member);
 }

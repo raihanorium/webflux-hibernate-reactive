@@ -8,4 +8,6 @@ import java.util.List;
 public interface MemberRepository {
 
     Uni<List<Member>> getAll();
+
+    Uni<Member> save(Member member);
 }

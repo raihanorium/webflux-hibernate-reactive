@@ -20,7 +20,7 @@ public class Member implements Serializable {
     private static final long serialVersionUID = 8639722432182619877L;
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "member_name")
