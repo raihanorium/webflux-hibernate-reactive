@@ -2,11 +2,13 @@ package com.raihanorium.webfluxhibernatereactive.service;
 
 import com.raihanorium.webfluxhibernatereactive.model.Member;
 import com.raihanorium.webfluxhibernatereactive.repository.MemberRepository;
+import io.smallrye.mutiny.converters.multi.MultiReactorConverters;
 import io.smallrye.mutiny.converters.uni.UniReactorConverters;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -23,6 +25,13 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.getAll()
                 .convert()
                 .with(UniReactorConverters.toMono());
+    }
+
+    @Override
+    public Flux<Member> getAllMembersStream() {
+        return memberRepository.getAllStream()
+                .convert()
+                .with(MultiReactorConverters.toFlux());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.raihanorium.webfluxhibernatereactive.repository;
 
 import com.raihanorium.webfluxhibernatereactive.model.Member;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,15 @@ public class MemberRepositoryImpl implements MemberRepository {
         return sessionFactory.withSession(session -> session
                 .createQuery("from Member", Member.class)
                 .getResultList());
+    }
+
+    @Override
+    public Multi<Member> getAllStream() {
+        return sessionFactory.withSession(session -> session
+                        .createQuery("from Member", Member.class)
+                        .getResultList())
+                .onItem()
+                .transformToMulti(Multi.createFrom()::iterable);
     }
 
     @Override

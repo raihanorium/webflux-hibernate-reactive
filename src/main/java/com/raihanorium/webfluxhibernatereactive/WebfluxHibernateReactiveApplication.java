@@ -16,7 +16,7 @@ public class WebfluxHibernateReactiveApplication {
 
     @Bean
     public Mutiny.SessionFactory sessionFactory() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-pu");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-pu", MysqlPersistenceUnit.getProperties());
         return entityManagerFactory.unwrap(Mutiny.SessionFactory.class);
     }
 }
