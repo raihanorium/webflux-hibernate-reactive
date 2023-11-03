@@ -1,6 +1,5 @@
 package com.raihanorium.webfluxhibernatereactive.controller;
 
-import com.raihanorium.webfluxhibernatereactive.MysqlConfiguration;
 import com.raihanorium.webfluxhibernatereactive.model.Member;
 import com.raihanorium.webfluxhibernatereactive.service.MemberService;
 import org.junit.jupiter.api.Test;
@@ -21,9 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MemberController.class)
 @TestPropertySource(locations="classpath:application.properties")
 public class MemberControllerTest {
-
-    @MockBean
-    private MysqlConfiguration mysqlConfiguration;
 
     @MockBean
     private MemberService memberService;
